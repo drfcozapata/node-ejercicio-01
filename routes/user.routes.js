@@ -16,12 +16,15 @@ const {
 
 const router = express.Router();
 
-router.get('/', getAllUsers);
-router.post('/', createUserValidations, checkValidations, createUser);
 router
+  .route('/')
+  .get(getAllUsers)
+  .post(createUserValidations, checkValidations, createUser);
+router
+  .use('/:id', userExists)
   .route('/:id')
-  .get(userExists, getUserById)
-  .patch(userExists, updateUser)
-  .delete(userExists, deleteUser);
+  .get(getUserById)
+  .patch(updateUser)
+  .delete(deleteUser);
 
 module.exports = { usersRouter: router };
