@@ -7,7 +7,8 @@ const {
 } = require('../middlewares/validations.middlewares');
 
 const {
-  getAllRepairs,
+  getAllCompletedRepairs,
+  getAllPendingRepairs,
   createRepair,
   getRepairById,
   completedRepair,
@@ -16,10 +17,10 @@ const {
 
 const router = express.Router();
 
-router
-  .route('/')
-  .get(getAllRepairs)
-  .post(createRepairValidations, checkValidations, createRepair);
+router.get('/completed', getAllCompletedRepairs);
+router.get('/pending', getAllPendingRepairs);
+router.post('/', createRepairValidations, checkValidations, createRepair);
+
 router
   .use('/:id', repairExists)
   .route('/:id')
