@@ -35,7 +35,7 @@ router.get('/check-token', checkToken);
 router.get('/', protectEmployees, getAllUsers);
 router.get('/:id', protectEmployees, userExists, getUserById);
 
-router.patch('/:id', userExists, updateUser);
-router.delete('/:id', userExists, deleteUser);
+router.patch('/:id', userExists, protectAccountOwner, updateUser);
+router.delete('/:id', userExists, protectAccountOwner, deleteUser);
 
 module.exports = { usersRouter: router };
